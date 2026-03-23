@@ -216,4 +216,27 @@ public final class Constants {
         };
         // @formatter:on
     }
+
+    public static final class hood {
+        public static final int hoodID = 10;
+        public static final double gearRatio = 8.0 / 27.0;
+
+        /* PID Values */
+        /** Proportional PID Value for hood position control. */
+        public static final double KP = 200.0;
+        /** Integral PID Value for hood position control. */
+        public static final double KI = 0.0;
+        /** Derivative PID Value for hood position control. */
+        public static final double KD = 0.0;
+
+        /* Characterization Values */
+        /** Static Characterization Value for overcoming friction. */
+        public static final double KS = 0.3;
+        /** Velocity Characterization Value */
+        public static final double KV = 0.0;
+        /** Acceleration Characterization Value */
+        public static final double KA = 0.0;
+        /** Gravity Characterization Value */
+        public static final double KG = 0.0;
+    }
 }
