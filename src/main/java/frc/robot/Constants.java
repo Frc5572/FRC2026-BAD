@@ -218,6 +218,7 @@ public final class Constants {
         // @formatter:on
     }
 
+    /** Magazine Constants */
     public static final class Magazine {
         /** ID for Magazine Motor 0 */
         public static final int motor0ID = 0;
