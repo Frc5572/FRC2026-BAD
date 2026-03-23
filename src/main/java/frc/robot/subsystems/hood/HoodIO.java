@@ -12,6 +12,9 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.util.GenerateEmptyIO;
 
 @GenerateEmptyIO
+/**
+ * Adjustable Hood Interface
+ */
 public interface HoodIO {
 
     /**

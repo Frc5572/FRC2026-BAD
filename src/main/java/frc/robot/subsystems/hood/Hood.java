@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+/**
+ * Adjustable Hood
+ */
 public final class Hood extends SubsystemBase {
 
     private final HoodIO io;

@@ -15,8 +15,11 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
 import frc.robot.util.PhoenixSignals;
 
+/**
+ * Adjustable Hood
+ */
 public class HoodReal implements HoodIO {
-    private final TalonFX hoodMotor = new TalonFX(Constants.hood.hoodID);
+    private final TalonFX hoodMotor = new TalonFX(Constants.Hood.hoodID);
     private final TalonFXConfiguration hoodMotorConfig = new TalonFXConfiguration();
 
     private StatusSignal<Angle> hoodAngle = hoodMotor.getPosition();
@@ -33,15 +36,15 @@ public class HoodReal implements HoodIO {
 
         // PID and feedforward
 
-        hoodMotorConfig.Slot0.kP = Constants.hood.KP;
-        hoodMotorConfig.Slot0.kI = Constants.hood.KI;
-        hoodMotorConfig.Slot0.kD = Constants.hood.KD;
-        hoodMotorConfig.Slot0.kS = Constants.hood.KS;
-        hoodMotorConfig.Slot0.kV = Constants.hood.KV;
-        hoodMotorConfig.Slot0.kA = Constants.hood.KA;
-        hoodMotorConfig.Slot0.kG = Constants.hood.KG;
+        hoodMotorConfig.Slot0.kP = Constants.Hood.KP;
+        hoodMotorConfig.Slot0.kI = Constants.Hood.KI;
+        hoodMotorConfig.Slot0.kD = Constants.Hood.KD;
+        hoodMotorConfig.Slot0.kS = Constants.Hood.KS;
+        hoodMotorConfig.Slot0.kV = Constants.Hood.KV;
+        hoodMotorConfig.Slot0.kA = Constants.Hood.KA;
+        hoodMotorConfig.Slot0.kG = Constants.Hood.KG;
 
-        hoodMotorConfig.Feedback.SensorToMechanismRatio = Constants.hood.gearRatio;
+        hoodMotorConfig.Feedback.SensorToMechanismRatio = Constants.Hood.gearRatio;
 
         hoodMotor.getConfigurator().apply(hoodMotorConfig);
 
