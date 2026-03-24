@@ -8,6 +8,7 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.util.GenerateEmptyIO;
+import frc.robot.util.tunable.PIDConstants;
 
 /**
  * Shooter IO Interface
@@ -31,5 +32,5 @@ public interface ShooterIO {
 
     public void runVelocity(double velocity);
 
-    public void configMotors();
+    public void setConstants(PIDConstants constants);
 }

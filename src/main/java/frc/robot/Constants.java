@@ -1,6 +1,7 @@
 package frc.robot;
 
 import static edu.wpi.first.units.Units.Inches;
+import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -20,6 +21,8 @@ import frc.robot.subsystems.swerve.mod.ModuleConstants;
 import frc.robot.subsystems.swerve.mod.ModuleConstantsBuilder;
 import frc.robot.subsystems.vision.CameraConstants;
 import frc.robot.subsystems.vision.CameraConstantsBuilder;
+import frc.robot.util.tunable.PIDConstants;
+import frc.robot.util.tunable.PIDConstantsBuilder;
 
 /**
  * Constants file.
@@ -53,6 +56,8 @@ public final class Constants {
         public static final double maxAngularVelocity = 9.0;
         public static final double maxAngularAcceleration = 9 * 5;
     }
+
+    public static final boolean tunable = true;
 
     /**
      * Swerve Constants
@@ -224,5 +229,20 @@ public final class Constants {
         public static final int rightMotorID = 31;
         public static final boolean isReversed = false;
         public static final MotorAlignmentValue motorAlignment = MotorAlignmentValue.Opposed;
+        public static final double atSpeedThreshold = 50.0;
+
+        // @formatter:off
+        public static final PIDConstants constants =
+            new PIDConstantsBuilder("ShooterConstantsPID", GravityTypeValue.Elevator_Static)
+                .kP(0.5)
+                .kI(0.0)
+                .kD(0.0)
+                .kV(0.122)
+                .kS(0.02)
+                .kG(0.0)
+                .kA(0.0)
+                .finish();
+
+        // @formatter:on
     }
 }

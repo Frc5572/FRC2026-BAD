@@ -8,13 +8,13 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
-import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants.Shooter;
 import frc.robot.util.PhoenixSignals;
+import frc.robot.util.tunable.PIDConstants;
 
 /** Shooter Real Implementation */
 public class ShooterReal implements ShooterIO {
@@ -70,22 +70,17 @@ public class ShooterReal implements ShooterIO {
     }
 
     @Override
-    public void configMotors() {
+    public void setConstants(PIDConstants constants) {
         motorConfig.MotorOutput.Inverted = Shooter.isReversed ? InvertedValue.Clockwise_Positive
             : InvertedValue.CounterClockwise_Positive;
         motorConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
-        motorConfig.Slot0.kP = 9999.0;
-        motorConfig.TorqueCurrent.PeakForwardTorqueCurrent = 1.0;
-        motorConfig.TorqueCurrent.PeakReverseTorqueCurrent = 0.0;
-        motorConfig.MotorOutput.PeakForwardDutyCycle = 1.0;
-        motorConfig.MotorOutput.PeakReverseDutyCycle = 0.0;
-
+        constants.apply(motorConfig.Slot1);
 
         shooterMotorLeft.getConfigurator().apply(motorConfig);
         shooterMotorRight.getConfigurator().apply(motorConfig);
 
         shooterMotorRight
-            .setControl(new Follower(shooterMotorLeft.getDeviceID(), MotorAlignmentValue.Opposed));
+            .setControl(new Follower(shooterMotorLeft.getDeviceID(), Shooter.motorAlignment));
     }
 }
