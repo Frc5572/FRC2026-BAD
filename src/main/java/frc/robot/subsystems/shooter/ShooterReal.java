@@ -33,6 +33,11 @@ public class ShooterReal implements ShooterIO {
     private final VoltageOut voltageOut = new VoltageOut(0.0);
     private final VelocityVoltage velocityVoltage = new VelocityVoltage(0.0).withSlot(1);
 
+    /**
+     * Shooter Subsystem Constructor
+     *
+     * @param io Shooter IO implementation
+     */
     public ShooterReal() {
         shooterMotorLeft = new TalonFX(Shooter.leftMotorID);
         shooterMotorRight = new TalonFX(Shooter.rightMotorID);
