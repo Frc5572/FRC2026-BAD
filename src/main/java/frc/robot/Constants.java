@@ -2,6 +2,7 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.Inches;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.studica.frc.AHRS.NavXComType;
@@ -215,5 +216,13 @@ public final class Constants {
                 .finish(),
         };
         // @formatter:on
+    }
+
+    /** Shooter Constants */
+    public static final class Shooter {
+        public static final int leftMotorID = 30;
+        public static final int rightMotorID = 31;
+        public static final boolean isReversed = false;
+        public static final MotorAlignmentValue motorAlignment = MotorAlignmentValue.Opposed;
     }
 }
