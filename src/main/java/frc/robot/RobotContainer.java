@@ -1,6 +1,5 @@
 package frc.robot;
 
-import static edu.wpi.first.units.Units.Degrees;
 import org.jspecify.annotations.NullMarked;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
@@ -67,7 +66,8 @@ public final class RobotContainer {
         driver.a().whileTrue(swerve.wheelRadiusCharacterization()).onFalse(swerve.emergencyStop());
         driver.b().whileTrue(swerve.feedforwardCharacterization()).onFalse(swerve.emergencyStop());
 
-        driver.povUp().onTrue(hood.setGoal(Degrees.of(20)));
+        driver.povUp().onTrue(hood.moveWithVoltage(5)).onFalse(hood.moveWithVoltage(0));
+        driver.povDown().onTrue(hood.moveWithVoltage(-5)).onFalse(hood.moveWithVoltage(0));
     }
 
     /** Runs once per 0.02 seconds after subsystems and commands. */

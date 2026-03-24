@@ -221,7 +221,7 @@ public final class Constants {
      * Adjustable Hood
      */
     public static final class Hood {
-        public static final int hoodID = 10;
+        public static final int hoodID = 34;
         public static final double gearRatio = 8.0 / 27.0;
 
         /* PID Values */

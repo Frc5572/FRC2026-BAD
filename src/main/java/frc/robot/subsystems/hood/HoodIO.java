@@ -18,7 +18,7 @@ import frc.robot.util.GenerateEmptyIO;
 public interface HoodIO {
 
     /**
-     * Container for all adjustable hood sensor inputs.
+     * Container for all hood sensor inputs.
      */
     @AutoLog
     public static class HoodInputs {
@@ -32,7 +32,7 @@ public interface HoodIO {
     public void setHoodVoltage(double volts);
 
     /**
-     * Updates the provided {@link AdjustableHoodInputs} structure with the latest sensor values.
+     * Updates the provided {@link HoodInputs} structure with the latest sensor values.
      * 
      * @param inputs updates inputs
      */
