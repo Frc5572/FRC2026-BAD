@@ -69,8 +69,6 @@ public class HoodReal implements HoodIO {
         inputs.voltage = hoodVoltage.getValue();
         inputs.current = hoodCurrent.getValue();
         inputs.velocity = hoodVelocity.getValue();
-
-        inputs.hoodLocation = hoodAngle.getValueAsDouble();
     }
 
     @Override

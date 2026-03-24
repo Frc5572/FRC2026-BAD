@@ -43,11 +43,7 @@ public final class Hood extends SubsystemBase {
         io.setTargetAngle(setAngle);
     }
 
-    public Command setGoal(Angle setAngle) {
-        return runOnce(() -> io.setTargetAngle(setAngle));
-    }
-
     public Command setGoal(Supplier<Angle> setAngle) {
-        return runOnce(() -> io.setTargetAngle(setAngle.get()));
+        return run(() -> io.setTargetAngle(setAngle.get()));
     }
 }
