@@ -3,6 +3,9 @@ package frc.robot;
 import org.jspecify.annotations.NullMarked;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
+import frc.robot.subsystems.hood.Hood;
+import frc.robot.subsystems.hood.HoodIOEmpty;
+import frc.robot.subsystems.hood.HoodReal;
 import frc.robot.subsystems.swerve.Swerve;
 import frc.robot.subsystems.swerve.SwerveIOEmpty;
 import frc.robot.subsystems.swerve.SwerveReal;
@@ -35,6 +38,7 @@ public final class RobotContainer {
     private final Swerve swerve;
     private final Vision vision;
     private final RobotViz viz;
+    private final Hood hood;
 
     /**
      */
@@ -43,10 +47,12 @@ public final class RobotContainer {
             case kReal:
                 swerve = new Swerve(SwerveReal::new, GyroNavX2::new, SwerveModuleReal::new);
                 vision = new Vision(swerve.state, new VisionReal());
+                hood = new Hood(new HoodReal());
                 break;
             default:
                 swerve = new Swerve(SwerveIOEmpty::new, GyroIOEmpty::new, SwerveModuleIOEmpty::new);
                 vision = new Vision(swerve.state, new VisionIOEmpty());
+                hood = new Hood(new HoodIOEmpty());
         }
         viz = new RobotViz(swerve);
 
@@ -59,6 +65,9 @@ public final class RobotContainer {
 
         driver.a().whileTrue(swerve.wheelRadiusCharacterization()).onFalse(swerve.emergencyStop());
         driver.b().whileTrue(swerve.feedforwardCharacterization()).onFalse(swerve.emergencyStop());
+
+        driver.povUp().onTrue(hood.moveWithVoltage(5)).onFalse(hood.moveWithVoltage(0));
+        driver.povDown().onTrue(hood.moveWithVoltage(-5)).onFalse(hood.moveWithVoltage(0));
     }
 
     /** Runs once per 0.02 seconds after subsystems and commands. */
