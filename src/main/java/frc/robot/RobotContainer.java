@@ -1,8 +1,12 @@
 package frc.robot;
 
 import org.jspecify.annotations.NullMarked;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
+import frc.robot.subsystems.magazine.Magazine;
+import frc.robot.subsystems.magazine.MagazineIOEmpty;
+import frc.robot.subsystems.magazine.MagazineReal;
 import frc.robot.subsystems.swerve.Swerve;
 import frc.robot.subsystems.swerve.SwerveIOEmpty;
 import frc.robot.subsystems.swerve.SwerveReal;
@@ -30,11 +34,12 @@ public final class RobotContainer {
     /* Controllers */
     public final CommandXboxController driver =
         new CommandXboxController(Constants.DriverControls.controllerId);
-
+    public final CommandXboxController tuner = new CommandXboxController(3);
     /* Subsystems */
     private final Swerve swerve;
     private final Vision vision;
     private final RobotViz viz;
+    private final Magazine magazine;
 
     /**
      */
@@ -43,8 +48,10 @@ public final class RobotContainer {
             case kReal:
                 swerve = new Swerve(SwerveReal::new, GyroNavX2::new, SwerveModuleReal::new);
                 vision = new Vision(swerve.state, new VisionReal());
+                magazine = new Magazine(new MagazineReal());
                 break;
             default:
+                magazine = new Magazine(new MagazineIOEmpty());
                 swerve = new Swerve(SwerveIOEmpty::new, GyroIOEmpty::new, SwerveModuleIOEmpty::new);
                 vision = new Vision(swerve.state, new VisionIOEmpty());
         }
@@ -59,6 +66,18 @@ public final class RobotContainer {
 
         driver.a().whileTrue(swerve.wheelRadiusCharacterization()).onFalse(swerve.emergencyStop());
         driver.b().whileTrue(swerve.feedforwardCharacterization()).onFalse(swerve.emergencyStop());
+        setUpTunerController();
+    }
+
+    private double trims = 0.0;
+
+    private void setUpTunerController() {
+        tuner.rightTrigger().whileTrue(magazine.setVoltage(trims));
+        tuner.povUp().onTrue(Commands.runOnce(() -> trims += 1));
+        tuner.povDown().onTrue(Commands.runOnce(() -> trims -= 1));
+        tuner.povLeft().onTrue(Commands.runOnce(() -> trims -= 0.5));
+        tuner.povRight().onTrue(Commands.runOnce(() -> trims += 0.5));
+
     }
 
     /** Runs once per 0.02 seconds after subsystems and commands. */
