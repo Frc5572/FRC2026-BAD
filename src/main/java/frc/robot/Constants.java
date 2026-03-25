@@ -256,7 +256,7 @@ public final class Constants {
                     .kG(0.0)
                     .kA(0.0)
                     .finish())
-                .finish();
+                    .finish();
         // @formatter:on
     }
 }
