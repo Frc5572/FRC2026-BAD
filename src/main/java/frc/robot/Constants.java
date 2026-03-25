@@ -239,24 +239,12 @@ public final class Constants {
         /** Neutral Mode for Shooter Motors */
         public static final NeutralModeValue neutralMode = NeutralModeValue.Brake;
 
-        //@formatter:off
         public static final FlywheelConstants constants =
-            new FlywheelConstantsBuilder("MagazineConstants")
-                .holdCurrent(40.0)
-                .maxDutyCycle(1.0)
-                .isReversed(true)
-                .velocityTolerance(8)
-                .atSpeedDebounce(0.1)
-                .pid(new PIDConstantsBuilder("MagazineConstantsPID", GravityTypeValue.Elevator_Static)
-                    .kP(0.5)
-                    .kI(0.0)
-                    .kD(0.0)
-                    .kV(0.122)
-                    .kS(0.02)
-                    .kG(0.0)
-                    .kA(0.0)
-                    .finish())
-                    .finish();
-        // @formatter:on
+            new FlywheelConstantsBuilder("MagazineConstants").holdCurrent(40.0).maxDutyCycle(1.0)
+                .isReversed(true).velocityTolerance(8).atSpeedDebounce(0.1)
+                .pid(new PIDConstantsBuilder("MagazineConstantsPID",
+                    GravityTypeValue.Elevator_Static).kP(0.5).kI(0.0).kD(0.0).kV(0.122).kS(0.02)
+                        .kG(0.0).kA(0.0).finish())
+                .finish();
     }
 }
