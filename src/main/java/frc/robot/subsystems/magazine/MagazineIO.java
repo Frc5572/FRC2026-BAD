@@ -6,6 +6,7 @@ import org.littletonrobotics.junction.AutoLog;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.util.GenerateEmptyIO;
+import frc.robot.util.tunable.FlywheelConstants;
 
 /**
  * indexer interface
@@ -25,5 +26,5 @@ public interface MagazineIO {
 
     public void setMagazineVoltage(double votlage);
 
-    // public void setConstants(FlywheelConstants constants);
+    public void setConstants(FlywheelConstants constants);
 }

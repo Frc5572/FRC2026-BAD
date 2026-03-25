@@ -4,6 +4,7 @@ import static edu.wpi.first.units.Units.Volts;
 import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 /**
  * Indexer class
@@ -20,6 +21,9 @@ public class Magazine extends SubsystemBase {
     public void periodic() {
         io.updateInputs(inputs);
         Logger.processInputs("Indexer", inputs);
+        Constants.Magazine.constants.ifDirty(constants -> {
+            io.setConstants(constants);
+        });
     }
 
 

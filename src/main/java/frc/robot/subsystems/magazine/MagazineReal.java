@@ -49,7 +49,8 @@ public class MagazineReal implements MagazineIO {
         motor0.setControl(velocityVoltage.withAcceleration(voltage * desiredSpeed));
     }
 
-    // @Override
+    /** Sets Magazine Constants */
+    @Override
     public void setConstants(FlywheelConstants constants) {
         motor1.setControl(new Follower(motor0.getDeviceID(), Constants.Magazine.motorAlingment));
 
