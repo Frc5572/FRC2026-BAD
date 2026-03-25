@@ -29,7 +29,7 @@ public class Magazine extends SubsystemBase {
 
     public Command setVoltage(double voltage) {
         Logger.recordOutput("Magazine/targetVoltage", Volts.of(voltage));
-        return run(() -> io.setMagazineVoltage(voltage));
+        return runEnd(() -> io.setMagazineVoltage(voltage), () -> io.setMagazineVoltage(0.0));
     }
 }
 
