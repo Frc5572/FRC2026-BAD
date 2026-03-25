@@ -1,6 +1,7 @@
 package frc.robot;
 
 import static edu.wpi.first.units.Units.Inches;
+import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -20,11 +21,16 @@ import frc.robot.subsystems.swerve.mod.ModuleConstants;
 import frc.robot.subsystems.swerve.mod.ModuleConstantsBuilder;
 import frc.robot.subsystems.vision.CameraConstants;
 import frc.robot.subsystems.vision.CameraConstantsBuilder;
+import frc.robot.util.tunable.FlywheelConstants;
+import frc.robot.util.tunable.FlywheelConstantsBuilder;
+import frc.robot.util.tunable.PIDConstantsBuilder;
 
 /**
  * Constants file.
  */
 public final class Constants {
+
+    public static final boolean tunable = true;
 
     /** Constants for driver controls */
     public static class DriverControls {
@@ -224,14 +230,7 @@ public final class Constants {
         public static final int motor0ID = 0;
         /** ID for Magazine Motor 1 */
         public static final int motor1ID = 1;
-        /** ID for Magazine Motor 2 */
-        public static final int motor2ID = 2;
-        /** ID for Magazine Motor 3 */
-        public static final int motor3ID = 3;
-        /** ID for Magazine Motor 4 */
-        public static final int motor4ID = 4;
-        /** ID for Magazine Motor 5 */
-        public static final int motor5ID = 5;
+
 
         /** Motor Invert for Shooter Motors */
         public static final InvertedValue inverted = InvertedValue.Clockwise_Positive;
@@ -240,24 +239,24 @@ public final class Constants {
         /** Neutral Mode for Shooter Motors */
         public static final NeutralModeValue neutralMode = NeutralModeValue.Brake;
 
-        // @formatter:off
-        // public static final FlywheelConstants constants =
-        //     new FlywheelConstantsBuilder("MagazineConstants")
-        //         .holdCurrent(40.0)
-        //         .maxDutyCycle(1.0)
-        //         .isReversed(true)
-        //         .velocityTolerance(8)
-        //         .atSpeedDebounce(0.1)
-        //         .pid(new PIDConstantsBuilder("MagazineConstantsPID", GravityTypeValue.Elevator_Static)
-        //             .kP(0.5)
-        //             .kI(0.0)
-        //             .kD(0.0)
-        //             .kV(0.122)
-        //             .kS(0.02)
-        //             .kG(0.0)
-        //             .kA(0.0)
-        //             .finish())
-        //         .finish();
-        // // @formatter:on
+        //@formatter:off
+        public static final FlywheelConstants constants =
+            new FlywheelConstantsBuilder("MagazineConstants")
+                .holdCurrent(40.0)
+                .maxDutyCycle(1.0)
+                .isReversed(true)
+                .velocityTolerance(8)
+                .atSpeedDebounce(0.1)
+                .pid(new PIDConstantsBuilder("MagazineConstantsPID", GravityTypeValue.Elevator_Static)
+                    .kP(0.5)
+                    .kI(0.0)
+                    .kD(0.0)
+                    .kV(0.122)
+                    .kS(0.02)
+                    .kG(0.0)
+                    .kA(0.0)
+                    .finish())
+                .finish();
+        // @formatter:on
     }
 }

@@ -4,12 +4,14 @@ import org.littletonrobotics.junction.Logger;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
 import frc.robot.util.PhoenixSignals;
+import frc.robot.util.tunable.FlywheelConstants;
 
 /**
  * real implementation of indexer
@@ -30,7 +32,7 @@ public class MagazineReal implements MagazineIO {
         Logger.recordOutput("Magazine/desiredSpeed", desiredSpeed);
 
         PhoenixSignals.registerSignals(false, motor0Velocity, motor0Voltage);
-        // setConstants(Constants.Magazine.constants);
+        setConstants(Constants.Magazine.constants);
     }
 
     @Override
@@ -43,24 +45,24 @@ public class MagazineReal implements MagazineIO {
     }
 
     @Override
-    public void setMagazineVoltage(double votlage) {
-        motor0.setControl(velocityVoltage.withAcceleration(votlage * desiredSpeed));
+    public void setMagazineVoltage(double voltage) {
+        motor0.setControl(velocityVoltage.withAcceleration(voltage * desiredSpeed));
     }
 
     // @Override
-    // public void setConstants(FlywheelConstants constants) {
-    // motor1.setControl(new Follower(motor0.getDeviceID(), Constants.Magazine.motorAlingment));
+    public void setConstants(FlywheelConstants constants) {
+        motor1.setControl(new Follower(motor0.getDeviceID(), Constants.Magazine.motorAlingment));
 
-    // magzineConfig.MotorOutput.Inverted = Constants.Magazine.inverted;
-    // magzineConfig.MotorOutput.NeutralMode = Constants.Magazine.neutralMode;
-    // magzineConfig.TorqueCurrent.PeakForwardTorqueCurrent = constants.holdCurrent;
-    // magzineConfig.TorqueCurrent.PeakReverseTorqueCurrent = 0.0;
-    // magzineConfig.MotorOutput.PeakForwardDutyCycle = constants.maxDutyCycle;
-    // magzineConfig.MotorOutput.PeakReverseDutyCycle = 0.0;
+        magzineConfig.MotorOutput.Inverted = Constants.Magazine.inverted;
+        magzineConfig.MotorOutput.NeutralMode = Constants.Magazine.neutralMode;
+        magzineConfig.TorqueCurrent.PeakForwardTorqueCurrent = constants.holdCurrent;
+        magzineConfig.TorqueCurrent.PeakReverseTorqueCurrent = 0.0;
+        magzineConfig.MotorOutput.PeakForwardDutyCycle = constants.maxDutyCycle;
+        magzineConfig.MotorOutput.PeakReverseDutyCycle = 0.0;
 
-    // constants.pid.apply(magzineConfig.Slot0);
+        constants.pid.apply(magzineConfig.Slot0);
 
-    // motor0.getConfigurator().apply(magzineConfig);
-    // motor1.getConfigurator().apply(magzineConfig);
-    // }
+        motor0.getConfigurator().apply(magzineConfig);
+        motor1.getConfigurator().apply(magzineConfig);
+    }
 }
