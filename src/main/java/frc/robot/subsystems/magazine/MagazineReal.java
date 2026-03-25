@@ -46,7 +46,7 @@ public class MagazineReal implements MagazineIO {
 
     @Override
     public void setMagazineVoltage(double voltage) {
-        motor0.setControl(velocityVoltage.withAcceleration(voltage * desiredSpeed));
+        motor0.setVoltage(voltage);
     }
 
     /** Sets Magazine Constants */
